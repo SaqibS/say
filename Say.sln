@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Say", "Say\Say.csproj", "{72D8012E-8126-468E-95BA-A53CD9ECCE33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Say", "Say.csproj", "{72D8012E-8126-468E-95BA-A53CD9ECCE33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
