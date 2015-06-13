@@ -18,14 +18,14 @@
                 synth = new SpeechSynthesizer();
                 string textToSpeak = "";
 
-                options = new OptionSet()
+                options = new OptionSet
             {
                 { "v|voice=", "Use the specified {voice} (surround the name in quotes if it contains spaces).", x => { synth.SelectVoice(x); } },
-                { "r|rate=", "Speak at the specified {rate} (0-20).", x => { synth.Rate = int.Parse(x)+10; } },
+                { "r|rate=", "Speak at the specified {rate} (0-20).", x => { SetRate(x); } },
                 { "f|input-file=", "Speak the contents of {file.txt}.", x => { textToSpeak=File.ReadAllText(x); } },
                 { "o|output-file=", "Save the audio to {file.wav}.", x => { synth.SetOutputToWaveFile(x); } },
-                { "l|list-voices", "List available voices.", x => { ListVoices(); Environment.Exit(0); } },
-                { "h|help", "Print this help message and exit.", x => { PrintHelpMessage(); Environment.Exit(0); } }
+                { "l|list-voices", "List available voices.", x => { ListVoices(); return; } },
+                { "h|help", "Print this help message and exit.", x => { PrintHelpMessage(); return; } }
             };
 
                 List<string> extra = options.Parse(args);
@@ -58,6 +58,17 @@
                 Console.WriteLine();
                 PrintHelpMessage();
             }
+        }
+
+        private static void SetRate(string input)
+        {
+            int value = int.Parse(input);
+            if (value < 0 || value > 20)
+            {
+                throw new ArgumentOutOfRangeException("input", "Rate must be between 0 and 20 (default=10).");
+            }
+
+            synth.Rate = value - 10;
         }
 
         private static void ListVoices()
